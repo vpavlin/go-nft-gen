@@ -1,0 +1,25 @@
+{
+    "description": "These are just some fancy NFTs to show off my amazing design skills",
+    "layers": [
+        {
+            "name": "Background",
+            "base_path": "./trait-layers/backgrounds"
+        },
+        {
+            "name": "Left-top",
+            "base_path": "./trait-layers/left-top"
+        },
+        {
+            "name": "Left-bottom",
+            "base_path": "./trait-layers/left-bottom"
+        },
+        {
+            "name": "Right-top",
+            "base_path": "./trait-layers/right-top"
+        },
+        {
+            "name": "Right-bottom",
+            "base_path": "./trait-layers/right-bottom"        
+        }
+    ]
+}
