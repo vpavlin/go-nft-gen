@@ -66,7 +66,24 @@ The above layer definition lists all the potential fields you can configure for 
 
 ## Execute
 
+When you run
+
+```
+nftgen run -c config.minimal.json --output output-minimal -n 100
+```
+
+you will see output of
+
+```
+INFO[0000] Producing 100 NFTS                           
+ => Processed 100/100 NFTs
+```
+
+and the results will be stored in `output-minimal` folder
+
 ## Build
+
+You can build the `nftgen` tool from source by using the `Makefile` in the repository.
 
 ```
 make build

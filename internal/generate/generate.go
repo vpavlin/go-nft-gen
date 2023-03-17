@@ -42,6 +42,7 @@ type NFT struct {
 }
 
 type Generate struct {
+	debug      bool
 	nftHash    map[string]*NFT
 	AttrMax    map[Attribute]int
 	AttrCount  map[Attribute]int
@@ -54,8 +55,9 @@ type Generate struct {
 	waitGroup  sync.WaitGroup
 }
 
-func NewGenerate(c config.Config) (*Generate, error) {
+func NewGenerate(c config.Config, debug bool) (*Generate, error) {
 	g := &Generate{
+		debug:      debug,
 		AttrMax:    make(map[Attribute]int),
 		AttrCount:  make(map[Attribute]int),
 		nftHash:    make(map[string]*NFT),
@@ -288,7 +290,9 @@ func (g *Generate) GenerateN(n uint) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 	go g.Save(ctx)
-	go g.Progress(ctx, n)
+	if !g.debug {
+		go g.Progress(ctx, n)
+	}
 	for i := uint(0); i < n; i++ {
 		n, err := g.NewNFT()
 		if err != nil {
@@ -334,7 +338,9 @@ func (g *Generate) Save(ctx context.Context) {
 				}
 
 				logrus.Debugf("Done with NFT %d", n.id)
-				g.progressCh <- struct{}{}
+				if !g.debug {
+					g.progressCh <- struct{}{}
+				}
 			}(n)
 		}
 	}

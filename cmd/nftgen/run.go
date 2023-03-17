@@ -31,7 +31,7 @@ var runCmd = &cobra.Command{
 			c.OutputDir = output
 		}
 
-		g, err := generate.NewGenerate(c)
+		g, err := generate.NewGenerate(c, debug)
 		if err != nil {
 			logrus.Fatal(err)
 		}
